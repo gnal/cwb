@@ -1,0 +1,132 @@
+{% extends 'MsiCmfBundle:Page:layout.html.twig' %}
+
+{% block css %}
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('bundles/cwbcore/css/style.css') }}">
+{{ parent() }}
+<script>
+function nl(t){t.className=t.className.replace(new RegExp(/\shide|hide\s|hide/),'');}
+</script>
+{% endblock css %}
+
+{% block js %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+<script src="{{ asset('bundles/cwbcore/vendor/msi-slider/js/msi-slider.js') }}"></script>
+<script src="{{ asset('bundles/cwbcore/vendor/superfish-1.4.8/js/hoverIntent.js') }}"></script>
+<script src="{{ asset('bundles/cwbcore/vendor/superfish-1.4.8/js/superfish.js') }}"></script>
+{{ parent() }}
+<script>
+jQuery(function(){
+    jQuery('ul.sf-menu').superfish({
+        speed: 'fast',
+        delay: 0,
+        autoArrows: false,
+        disableHI: true,
+        animation: {opacity: 'show', height: 'show'},
+    });
+});
+</script>
+<script>
+(function($) {
+    "use strict";
+    $('#slider').msiSlider({
+        axis: 'y',
+        pauseTime: 3800,
+        carouselSpeed: 400,
+        sliderSpeed: 800,
+        carouselLiDimension: 50,
+        cycle: true,
+        slider: true,
+        sliderEffect: 'fade',
+        sliderArgs: {mode: 'show', easing: 'easeInCirc'},
+    });
+})(jQuery);
+</script>
+{% endblock js %}
+
+{% block body %}
+<div class="wrap">
+    <div class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="row-fluid">
+                    <div class="span5">
+                        <h1><a href="{{ path('msi_page_home') }}">Dadada</a></h1>
+                    </div>
+                    <div class="span7">
+                        <ul class="nav nav-pills z pull-right" style="margin: 0;">
+                            <li><a href="{{ path('msi_page_home', {'_locale': app.request.locale == 'fr' ? 'en' : 'fr'}) }}">{{ app.request.locale == 'fr' ? 'English' : 'Français' }}</a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                        {{ knp_menu_render('CwbCoreBundle:MenuBuilder:mainMenu', {'allow_safe_labels': true, 'depth': 3, 'currentClass': 'current'}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{#<div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-inner">
+        <div class="container">
+            <p><a href="{{ path('msi_page_home') }}"><img width=350 src="/uploads/images/logo.png" alt="logo"></a></p>
+            <ul class="nav pull-right">
+                <li><a href="#">English</a></li>
+            </ul>
+            <p class="navbar-text pull-right">|</p>
+            {{ knp_menu_render('CwbCoreBundle:MenuBuilder:mainMenu', {'allow_safe_labels': true, 'depth': 3, 'currentClass': 'current'}) }}
+        </div>
+    </div>
+</div>
+#}
+    <div class="container content">
+        <div class="content-inner">
+            {#
+                <div style="box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);margin-bottom: 30px;">
+                <div class="row">
+                    <div class="span5">
+                        <div class="slider-text">
+                            <h2>Express Help For Your Pets!</h2>
+                            <p>Pellentesque ut massa vitae tortor consequat adipiscing. Nunc consequat rutrum urna eu rhoncus. Aliquam erat volutpat.</p>
+                            <p>&bull; &bull; &bull;</p>
+                        </div>
+                    </div>
+                    <div class="span7" style="margin-left: 0;width: 560px;">
+                        <div id=slider>
+                            <ul class="unstyled slider">
+
+                                    <li><img class="hide" onload="nl(this);" src="http://placekitten.com/g/560/280" alt="0"></li>
+
+                            </ul>
+                            <div class="carousel-wrap">
+                                <ul class="unstyled carousel">
+
+                                        <li><img class="hide" onload="nl(this);" src="http://placekitten.com/g/560/280" alt="0"></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            #}
+            {# CONTENT #}
+            {% if page.showTitle %}<h2>{{ block('title') }}</h2><hr>{% endif %}
+            {{ block('page_content') }}
+        </div>
+    </div>
+    <div class="push"></div>
+</div>
+<div class="navbar navbar-fixed-bottom navbar-inverse">
+    <div class="navbar-inner">
+        <div class="container">
+            <p class="navbar-text uppercase">
+                <small>&copy; {{ 'now'|date('Y') }} cool website bro. all rights reserved.</small>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock body %}
