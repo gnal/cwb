@@ -1,3 +1,9 @@
+homepage:
+    pattern:  /
+    defaults: { _controller: CwbCoreBundle:Default:homepage }
+    # requirements:
+    #     _locale: fr|en
+
 cwb_core:
     resource: "@CwbCoreBundle/Resources/config/routing.yml"
     prefix:   /
